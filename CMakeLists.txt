@@ -171,6 +171,16 @@ add_subdirectory(lib/assimp)
 include_directories(lib/assimp/include)
 
 # ----------------------------
+# KTX (Khronos Texture)
+# ----------------------------
+option(KTX_FEATURE_STATIC_LIBRARY ON)
+option(KTX_FEATURE_TESTS OFF)
+option(KTX_FEATURE_TOOLS OFF)
+option(KTX_FEATURE_VK_UPLOAD ON) # necessário para ktxvulkan.h
+
+add_subdirectory(lib/KTX-Software)
+
+# ----------------------------
 # Sources and executable
 # ----------------------------
 file(GLOB_RECURSE SOURCES src/*.cpp)
@@ -202,9 +212,9 @@ endif()
 # Libraries
 # ----------------------------
 if(WIN32)
-    set(LIBRARIES glfw assimp vulkan-1)
+    set(LIBRARIES glfw assimp ktx vulkan-1)
 elseif(UNIX)
-    set(LIBRARIES glfw Vulkan::Vulkan pthread dl X11 Xrandr Xi Xcursor glm::glm assimp)
+    set(LIBRARIES glfw Vulkan::Vulkan pthread dl X11 Xrandr Xi Xcursor glm::glm assimp ktx)
 endif()
 
 target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
