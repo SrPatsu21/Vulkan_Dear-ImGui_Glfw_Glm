@@ -15,7 +15,6 @@
         -v "$(pwd)/$DEST":/copy-dest \
         "$IMAGE" \
         bash -c "
-            cp -r /workspace/* /copy-dest/ || true
             cp -r /root/.vscode-server/extensions /copy-dest/vscode-extensions/ || true
         "
 

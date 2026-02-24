@@ -120,6 +120,20 @@
     `rm -R lib/assimp/assimp-5.3.1`
     `rm lib/v5.3.1.zip`
 
+### KTX-Software
+
+- all in one
+
+```shell
+cd lib/ && curl -L -O https://github.com/KhronosGroup/KTX-Software/archive/refs/tags/v4.4.2.zip && unzip v4.4.2.zip && rm v4.4.2.zip && mv KTX-Software-4.4.2 KTX-Software
+```
+
+`cd lib/`
+`curl -L -O https://github.com/KhronosGroup/KTX-Software/archive/refs/tags/v4.4.2.zip`
+`unzip v4.4.2.zip`
+`rm v4.4.2.zip`
+`mv KTX-Software-4.4.2 KTX-Software`
+
 ### Embedded libs
 
 ```shell
