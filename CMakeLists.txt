@@ -176,7 +176,7 @@ include_directories(lib/assimp/include)
 option(KTX_FEATURE_STATIC_LIBRARY ON)
 option(KTX_FEATURE_TESTS OFF)
 option(KTX_FEATURE_TOOLS OFF)
-option(KTX_FEATURE_VK_UPLOAD ON) # necessário para ktxvulkan.h
+option(KTX_FEATURE_VK_UPLOAD ON)
 
 add_subdirectory(lib/KTX-Software)
 
