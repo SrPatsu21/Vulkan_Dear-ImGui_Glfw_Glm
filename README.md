@@ -58,11 +58,18 @@ Container to compile everything together
 ```yaml
 services:
     dear-glfw-vulkan-compiler:
-        image: srpatsu21/dear-glfw-vulkan-compiler:latest
+        image: srpatsu21/dear-glfw-vulkan-compiler:1.2.0
         container_name: dear-glfw-vulkan-dev
         stdin_open: true
         tty: true
         working_dir: /workspace
+        environment:
+            # ssh pass
+            ROOT_PASSWORD: 123
+        ports:
+            # ssh port
+            - "2222:22"
+
         volumes:
             # create build files
             - ./build:/workspace/build
@@ -83,7 +90,6 @@ services:
 
             # map extensions here
             - ./vscode-extensions:/root/.vscode-server/extensions/
-        command: ["/bin/bash"]
 ```
 
 - Acess the container to compile
