@@ -65,7 +65,7 @@ services:
         working_dir: /workspace
         environment:
             # ssh pass
-            ROOT_PASSWORD: 123
+            ROOT_PASSWORD: devcontainer
         ports:
             # ssh port
             - "2222:22"
