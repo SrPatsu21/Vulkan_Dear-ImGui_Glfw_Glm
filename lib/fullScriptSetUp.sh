@@ -1,6 +1,6 @@
 mkdir -p lib/
 
-sudo apt-get install -y --no-install-recommends libgl-dev wayland-protocols libwayland-bin libwayland-dev libxkbcommon-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev pkg-config mingw-w64 mingw-w64-x86-64-dev libgl1-mesa-dev git cmake libvulkan-dev vulkan-tools vulkan-validationlayers glslang-tools libglm-dev apt-file libdecor-0-0 libdecor-0-plugin-1-gtk libdecor-0-plugin-1-cairo libgtk-3-0 gnome-themes-extra-data libassimp-dev
+sudo apt-get install -y --no-install-recommends libgl-dev wayland-protocols libwayland-bin libwayland-dev libxkbcommon-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev pkg-config mingw-w64 mingw-w64-x86-64-dev libgl1-mesa-dev git cmake libvulkan-dev vulkan-tools vulkan-validationlayers glslang-tools libglm-dev apt-file libdecor-0-0 libdecor-0-plugin-1-gtk libdecor-0-plugin-1-cairo libgtk-3-0 gnome-themes-extra-data libassimp-dev zlib1g-dev
 
 # Dear ImGui
 
@@ -12,9 +12,9 @@ rm lib/v1.92.8.zip
 # GLFW
 
 wget -P lib/ "https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.zip" && \
-unzip lib/3.4.zip -d lib/ && \
+unzip lib/glfw-3.4.zip -d lib/ && \
 mv lib/glfw-3.4 lib/glfw && \
-rm lib/3.4.zip
+rm lib/glfw-3.4.zip
 
 # Vulkan
 git clone --branch v1.4.352 https://github.com/KhronosGroup/Vulkan-Headers.git lib/Vulkan-Headers && \
@@ -23,8 +23,8 @@ git clone --branch v1.4.352 https://github.com/KhronosGroup/Vulkan-Loader.git li
 # GLM
 
 wget -P lib/ "https://github.com/g-truc/glm/releases/download/1.0.3/glm-1.0.3.zip" && \
-7z x lib/1.0.3.zip -o./lib/glm && \
-rm lib/1.0.3.zip
+7z x lib/glm-1.0.3.zip -o./lib/glm && \
+rm lib/glm-1.0.3.zip
 
 # STD
 

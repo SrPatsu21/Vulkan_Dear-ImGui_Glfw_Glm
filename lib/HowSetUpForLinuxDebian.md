@@ -3,7 +3,8 @@
 ## libs
 
 ```shell
-mkdir -p lib/
+mkdir -p ./lib/
+sudo apt install -y zlib1g-dev build-essential cmake pkg-config git mingw-w64 curl wget gnupg ca-certificates openssh-client
 ```
 
 ### Dear ImGui
@@ -25,11 +26,11 @@ rm lib/v1.92.8.zip
 # Download
 wget -P lib/ "https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.zip" && \
 # Unzip
-unzip lib/3.4.zip -d lib/ && \
+unzip lib/glfw-3.4.zip -d lib/ && \
 # Rename
 mv lib/glfw-3.4 lib/glfw && \
 # Remove zip file
-rm lib/3.4.zip
+rm lib/glfw-3.4.zip
 ```
 
 ```shell
@@ -79,8 +80,8 @@ git clone --branch v1.4.352 https://github.com/KhronosGroup/Vulkan-Loader.git li
 sudo apt install -y libglm-dev && \
 # windows cross compile
 wget -P lib/ "https://github.com/g-truc/glm/releases/download/1.0.3/glm-1.0.3.zip" && \
-7z x lib/1.0.3.zip -o./lib/glm && \
-rm lib/1.0.3.zip
+7z x lib/glm-1.0.3.zip -o./lib/glm && \
+rm lib/glm-1.0.3.zip
 ```
 
 ### STD
