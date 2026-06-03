@@ -56,6 +56,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     message(STATUS "Compiling in Release mode")
     add_compile_definitions(NDEBUG)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+    set(CMAKE_C_FLAGS_RELEASE "-O3")
     if(UNIX)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=array-bounds")
     endif()
@@ -172,6 +173,9 @@ set(STB_SOURCES src/client/image/stb_image_impl.cpp) # adicione outros headers c
 # ----------------------------
 add_subdirectory(lib/assimp)
 include_directories(lib/assimp/include)
+target_compile_options(assimp PRIVATE
+    -Wno-error=maybe-uninitialized
+)
 
 # ----------------------------
 # KTX (Khronos Texture)

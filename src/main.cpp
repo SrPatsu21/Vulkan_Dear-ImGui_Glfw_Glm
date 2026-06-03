@@ -129,9 +129,11 @@ int main() {
     init_info.DescriptorPool = descriptorPool;
     init_info.MinImageCount = 2;
     init_info.ImageCount = 2;
-    init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
+    // init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
+    init_info.UseDynamicRendering = true;
     init_info.Allocator = nullptr;
-    init_info.RenderPass = renderPass;
+    init_info.PipelineRenderingCreateInfo = pipelineInfo;
+    // init_info.RenderPass = renderPass;
 
     ImGui_ImplVulkan_Init(&init_info);
 
