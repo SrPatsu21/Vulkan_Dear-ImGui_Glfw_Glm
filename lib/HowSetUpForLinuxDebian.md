@@ -2,146 +2,139 @@
 
 ## libs
 
+```shell
+mkdir -p lib/
+```
+
 ### Dear ImGui
 
-- All in one \
-    `wget -P lib/ "https://github.com/ocornut/imgui/archive/refs/tags/v1.92.2b.zip" && unzip lib/v1.92.2b.zip -d lib/ && mv lib/imgui-1.92.2b lib/Dear-ImGui && rm lib/v1.92.2b.zip`
-- Download \
-    `wget -P lib/ "https://github.com/ocornut/imgui/archive/refs/tags/v1.92.2b.zip"`
-- Unzip file \
-    `unzip lib/v1.92.2b.zip -d lib/`
-- Rename \
-    `mv lib/imgui-1.92.2b lib/Dear-ImGui`
-- Remove zip file \
-    `rm lib/v1.92.2b.zip`
+```shell
+# Download
+wget -P lib/ "https://github.com/ocornut/imgui/archive/refs/tags/v1.92.8.zip" && \
+# Unzip file
+unzip lib/v1.92.8.zip -d lib/ && \
+# Rename
+mv lib/imgui-1.92.8 lib/Dear-ImGui && \
+# Remove zip file
+rm lib/v1.92.8.zip
+```
 
 ### GLFW
 
-- All in one \
-    `wget -P lib/ "https://github.com/glfw/glfw/archive/refs/tags/3.4.zip" && unzip lib/3.4.zip -d lib/ && mv lib/glfw-3.4 lib/glfw && rm lib/3.4.zip && sudo apt install wayland-protocols libwayland-bin libwayland-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxkbcommon-dev pkg-config mingw-w64 mingw-w64-x86-64-dev libgl1-mesa-dev`
-- Download \
-    `wget -P lib/ "https://github.com/glfw/glfw/archive/refs/tags/3.4.zip"`
-- Unzip \
-    `unzip lib/3.4.zip -d lib/`
-- Rename \
-    `mv lib/glfw-3.4 lib/glfw`
-- Remove zip file \
-    `rm lib/3.4.zip`
-- lib
-    `sudo apt install libgl-dev`
-- Install wayland
-    `sudo apt install wayland-protocols`
-    `sudo apt install libwayland-bin`
-    `sudo apt install libwayland-dev`
-- Install xkbcommon
-    `sudo apt install libxkbcommon-dev`
-- Install libxrandr
-    `sudo apt install libxrandr-dev`
-- Install libxinerama
-    `sudo apt install libxinerama-dev`
-- Install libxcursor
-    `sudo apt install libxcursor-dev`
-- Install libxi
-    `sudo apt install libxi-dev`
-- Install pkg-config
-    `sudo apt install pkg-config`
-- Install mingw-w64
-    `sudo apt install mingw-w64 mingw-w64-x86-64-dev`
-- Install libgl1-mesa-dev
-    `sudo apt install libgl1-mesa-dev`
+```shell
+# Download
+wget -P lib/ "https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.zip" && \
+# Unzip
+unzip lib/3.4.zip -d lib/ && \
+# Rename
+mv lib/glfw-3.4 lib/glfw && \
+# Remove zip file
+rm lib/3.4.zip
+```
+
+```shell
+# lib
+sudo apt install -y libgl-dev && \
+# Install wayland
+sudo apt install -y wayland-protocols libwayland-bin libwayland-dev && \
+# Install xkbcommon
+sudo apt install -y libxkbcommon-dev && \
+# Install libxrandr
+sudo apt install -y libxrandr-dev && \
+# Install libxinerama
+sudo apt install -y libxinerama-dev && \
+# Install libxcursor
+sudo apt install -y libxcursor-dev && \
+# Install libxi
+sudo apt install -y libxi-dev && \
+# Install pkg-config
+sudo apt install -y pkg-config && \
+# Install mingw-w64
+sudo apt install -y mingw-w64 mingw-w64-x86-64-dev && \
+# Install libgl1-mesa-dev
+sudo apt install -y libgl1-mesa-dev
+```
 
 ### Vulkan
 
-- All in one \
-    `sudo apt install gnupg ca-certificates && curl -fsSL https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo tee /etc/apt/trusted.gpg.d/lunarg.gpg > /dev/null && sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-1.3.296-noble.list "https://packages.lunarg.com/vulkan/1.3.296/lunarg-vulkan-1.3.296-noble.list" && sudo apt install vulkan-utility-libraries-dev libvulkan-dev vulkan-tools vulkan-validationlayers && wget -P lib/ "https://sdk.lunarg.com/sdk/download/1.3.296.0/windows/VulkanSDK-1.3.296.0-Installer.exe" && sudo apt install 7zip && 7z x ./lib/VulkanSDK-1.3.296.0-Installer.exe -o./lib/vulkan-sdk-win && rm ./lib/VulkanSDK-1.3.296.0-Installer.exe`
-- apt certificates
-    `sudo apt install gnupg ca-certificates`
-- apt key \
-    `curl -fsSL https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo tee /etc/apt/trusted.gpg.d/lunarg.gpg > /dev/null`
-- apt sources \
-    `sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-1.3.296-noble.list "https://packages.lunarg.com/vulkan/1.3.296/lunarg-vulkan-1.3.296-noble.list"`
-- apt update
-    `sudo apt update`
-- install
-    `sudo apt install vulkan-utility-libraries-dev libvulkan-dev vulkan-tools vulkan-validationlayers`
-- download Vulkan for windows crosscomplile
-
-    ```shell
-        wget -P lib/ "https://sdk.lunarg.com/sdk/download/1.3.296.0/windows/VulkanSDK-1.3.296.0-Installer.exe"
-        sudo apt install 7zip wine
-        7z x ./lib/VulkanSDK-1.3.296.0-Installer.exe -o./lib/vulkan-sdk-win
-        rm ./lib/VulkanSDK-1.3.296.0-Installer.exe
-    ```
+```shell
+# install
+sudo apt install -y
+    git \
+    cmake \
+    mingw-w64 \
+    libvulkan-dev \
+    vulkan-tools \
+    vulkan-validationlayers \
+    glslang-tools && \
+# Download Vulkan for windows crosscomplile
+git clone --branch v1.4.352 https://github.com/KhronosGroup/Vulkan-Headers.git lib/Vulkan-Headers && \
+git clone --branch v1.4.352 https://github.com/KhronosGroup/Vulkan-Loader.git lib/Vulkan-Loader
+```
 
 ### GLM
 
-- all in one
-    `sudo apt install libglm-dev && wget -P lib/ "https://github.com/g-truc/glm/archive/refs/tags/1.0.1.zip" && 7z x lib/1.0.1.zip -o./lib/glm && rm lib/1.0.1.zip`
-- apt
-    `sudo apt install libglm-dev`
-- windows cross compile
-    `wget -P lib/ "https://github.com/g-truc/glm/archive/refs/tags/1.0.1.zip"`
-    `7z x lib/1.0.1.zip -o./lib/glm`
-    `rm lib/1.0.1.zip`
+```shell
+# install
+sudo apt install -y libglm-dev && \
+# windows cross compile
+wget -P lib/ "https://github.com/g-truc/glm/releases/download/1.0.3/glm-1.0.3.zip" && \
+7z x lib/1.0.3.zip -o./lib/glm && \
+rm lib/1.0.3.zip
+```
 
 ### STD
 
-- all in one
-
-    ```shell
-    mkdir -p lib/stb &&
-    cd lib/stb &&
-    curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_image.h &&
-    curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_image_write.h &&
-    curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_image_resize.h &&
-    curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_truetype.h &&
-    curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_rect_pack.h &&
-    curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_sprintf.h &&
-    curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_perlin.h &&
-    curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_textedit.h &&
-    cd ../..
-    ```
+```shell
+mkdir -p lib/stb &&
+cd lib/stb &&
+curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_image.h &&
+curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_image_write.h &&
+curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_image_resize.h &&
+curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_truetype.h &&
+curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_rect_pack.h &&
+curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_sprintf.h &&
+curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_perlin.h &&
+curl -O https://raw.githubusercontent.com/nothings/stb/master/stb_textedit.h &&
+cd ../..
+```
 
 ### GLS Lang Validator
 
-- apt
-    `sudo apt install glslang-tools`
+```shell
+sudo apt install -y glslang-tools
+```
 
 ### Assimp
 
-- all in one
-    `sudo apt-get install libassimp-dev && wget -P lib/ https://github.com/assimp/assimp/archive/refs/tags/v5.3.1.zip && 7z x lib/v5.3.1.zip -o./lib/assimp && mv lib/assimp/assimp-5.3.1/* lib/assimp/ && rm -R lib/assimp/assimp-5.3.1 && rm lib/v5.3.1.zip`
-- apt (optional)
-    `sudo apt-get install libassimp-dev`
-- download
-    `wget -P lib/ https://github.com/assimp/assimp/archive/refs/tags/v5.3.1.zip`
-    `7z x lib/v5.3.1.zip -o./lib/assimp`
-    `mv lib/assimp/assimp-5.3.1/* lib/assimp/`
-    `rm -R lib/assimp/assimp-5.3.1`
-    `rm lib/v5.3.1.zip`
+```shell
+sudo apt-get install libassimp-dev
+# windows cross compile
+wget -P lib/ https://github.com/assimp/assimp/archive/refs/tags/v6.0.5.zip
+7z x lib/v6.0.5.zip -o./lib/assimp
+mv lib/assimp/assimp-6.0.5/* lib/assimp/
+rm -R lib/assimp/assimp-6.0.5
+rm lib/v6.0.5.zip
+```
 
 ### KTX-Software
 
-- all in one
-
 ```shell
-cd lib/ && curl -L -O https://github.com/KhronosGroup/KTX-Software/archive/refs/tags/v4.4.2.zip && unzip v4.4.2.zip && rm v4.4.2.zip && mv KTX-Software-4.4.2 KTX-Software
+cd lib/
+curl -L -O https://github.com/KhronosGroup/KTX-Software/archive/refs/tags/v4.4.2.zip
+unzip v4.4.2.zip
+rm v4.4.2.zip
+mv KTX-Software-4.4.2 KTX-Software
 ```
-
-`cd lib/`
-`curl -L -O https://github.com/KhronosGroup/KTX-Software/archive/refs/tags/v4.4.2.zip`
-`unzip v4.4.2.zip`
-`rm v4.4.2.zip`
-`mv KTX-Software-4.4.2 KTX-Software`
 
 ### Embedded libs
 
 ```shell
-sudo apt install apt-file
+sudo apt install -y apt-file
 sudo apt-file update
-sudo apt install libdecor-0-0 libdecor-0-plugin-1-gtk libdecor-0-plugin-1-cairo
-sudo apt install libgtk-3-0
-sudo apt install gnome-themes-extra-data
+sudo apt install -y libdecor-0-0 libdecor-0-plugin-1-gtk libdecor-0-plugin-1-cairo
+sudo apt install -y libgtk-3-0
+sudo apt install -y gnome-themes-extra-data
 ```
 
 ```shell
@@ -169,11 +162,11 @@ for lib in "${LIBS[@]}"; do
     src="/usr/lib/x86_64-linux-gnu/$lib"
     cp "$src" "$DEST/"
 
-    # procurar dependências
+    # search for dependencies
     ldd "$src" | awk '{print $3}' | grep -E '^/' | while read dep; do
         base=$(basename "$dep")
 
-        # checar se é proibida
+        # check if blocked
         skip=false
         for bad in "${BLOCKED[@]}"; do
             if [[ "$base" == $bad* ]]; then
@@ -210,10 +203,10 @@ cp -r /usr/share/glib-2.0/schemas/* "$DEST/share/glib-2.0/schemas/"
 mkdir build
 cd build
 cmake ..
-make
+make -j$(nproc)
 ```
 
-- fix wayland
+- fix wayland if needed
 
 ```shell
 cat << 'EOF' > run.sh
@@ -235,7 +228,7 @@ chmod +x run.sh
 mkdir build-windows
 cd build-windows
 cmake .. -D CMAKE_TOOLCHAIN_FILE=../toolchain-mingw.cmake
-make
+make -j$(nproc)
 ```
 <!-- could be util
 -D UPDATE_DEPS=ON
@@ -249,7 +242,7 @@ make
 mkdir build-release
 cd build-release
 cmake .. -DCMAKE_BUILD_TYPE=Release # for realease
-make
+make -j$(nproc)
 ```
 
 - fix wayland
@@ -274,7 +267,7 @@ chmod +x run.sh
 mkdir build-windows-release
 cd build-windows-release
 cmake .. -D CMAKE_TOOLCHAIN_FILE=../toolchain-mingw.cmake -DCMAKE_BUILD_TYPE=Release # for realease
-make
+make -j$(nproc)
 ```
 <!-- could be util
 -D UPDATE_DEPS=ON

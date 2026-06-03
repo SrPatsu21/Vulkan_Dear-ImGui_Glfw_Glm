@@ -4,7 +4,11 @@ cmake_minimum_required(VERSION 3.10)
 # Project name variable
 # ----------------------------
 set(PROJECT_NAME "ProjectName")
-project(${PROJECT_NAME})
+project(
+    ${PROJECT_NAME}
+    VERSION 1.0.0
+    LANGUAGES C CXX
+    )
 
 # ----------------------------
 # C++ standard
@@ -51,7 +55,7 @@ endif()
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     message(STATUS "Compiling in Release mode")
     add_compile_definitions(NDEBUG)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
     if(UNIX)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=array-bounds")
     endif()
@@ -60,25 +64,26 @@ endif()
 # ----------------------------
 # Vulkan
 # ----------------------------
-if(UNIX)
+add_subdirectory(lib/Vulkan-Headers)
+if(WIN32)
+    if(NOT DEFINED VulkanHeaders_VERSION)
+        set(VulkanHeaders_VERSION "1.4.352")
+    endif()
+    add_subdirectory(lib/Vulkan-Loader)
+elseif(UNIX)
     find_package(Vulkan REQUIRED)
-elseif(WIN32)
-    set(VULKAN_SDK_PATH "./lib/vulkan-sdk-win")
-    include_directories(${VULKAN_SDK_PATH}/Include)
-    link_directories(${VULKAN_SDK_PATH}/Lib)
 endif()
-
 # ----------------------------
 # GLFW
 # ----------------------------
-    option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" OFF)
-    option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
-    option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
-    option(GLFW_INSTALL "Generate installation target" OFF)
-    option(GLFW_DOCUMENT_INTERNALS "Include internals in documentation" OFF)
-    add_subdirectory(lib/glfw)
-    # add_subdirectory(${GLFW_DIR} binary_dir EXCLUDE_FROM_ALL)
-    include_directories(lib/glfw/include)
+option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" OFF)
+option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
+option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
+option(GLFW_INSTALL "Generate installation target" OFF)
+option(GLFW_DOCUMENT_INTERNALS "Include internals in documentation" OFF)
+add_subdirectory(lib/glfw)
+# add_subdirectory(${GLFW_DIR} binary_dir EXCLUDE_FROM_ALL)
+include_directories(lib/glfw/include)
 
 # ----------------------------
 # Dear ImGui
@@ -109,11 +114,9 @@ endif()
 # ----------------------------
 # glslangValidator (shader compilation)
 # ----------------------------
-find_program(GLSLANG_VALIDATOR glslangValidator
-    PATHS
-        ${VULKAN_SDK_PATH}/Bin
-        /usr/bin
-        /usr/local/bin
+find_program(
+    GLSLANG_VALIDATOR
+    NAMES glslangValidator
 )
 if(NOT GLSLANG_VALIDATOR)
     message(FATAL_ERROR "glslangValidator not found!")
@@ -190,6 +193,12 @@ add_dependencies(${PROJECT_NAME} Shaders)
 # ----------------------------
 # Platform-specific target properties
 # ----------------------------
+
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/lib/Vulkan-Headers/include
+)
 if(WIN32)
     set_target_properties(
         ${PROJECT_NAME}
@@ -212,9 +221,26 @@ endif()
 # Libraries
 # ----------------------------
 if(WIN32)
-    set(LIBRARIES glfw assimp ktx vulkan-1)
+    set(LIBRARIES
+        glfw
+        assimp
+        ktx
+        vulkan
+    )
 elseif(UNIX)
-    set(LIBRARIES glfw Vulkan::Vulkan pthread dl X11 Xrandr Xi Xcursor glm::glm assimp ktx)
+    set(LIBRARIES
+        glfw
+        Vulkan::Vulkan
+        pthread
+        dl
+        X11
+        Xrandr
+        Xi
+        Xcursor
+        glm::glm
+        assimp
+        ktx
+    )
 endif()
 
 target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
