@@ -29,6 +29,3 @@ services:
 
             # if you want to replace the scripts
             - ./scripts:/workspace/scripts
-
-            # map extensions here
-            - ./vscode-extensions:/root/.vscode-server/extensions/

@@ -101,16 +101,3 @@ for lib in "${LIBS[@]}"; do
         fi
     done
 done
-
-# copiar plugins e temas (seguros)
-mkdir -p "$DEST/libdecor/plugins-1"
-cp /usr/lib/x86_64-linux-gnu/libdecor/plugins-1/* "$DEST/libdecor/plugins-1/"
-
-mkdir -p "$DEST/share/themes"
-cp -r /usr/share/themes/Adwaita "$DEST/share/themes/"
-
-mkdir -p "$DEST/share/gtk-3.0"
-cp -r /usr/share/gtk-3.0/* "$DEST/share/gtk-3.0/"
-
-mkdir -p "$DEST/share/glib-2.0/schemas"
-cp -r /usr/share/glib-2.0/schemas/* "$DEST/share/glib-2.0/schemas/"
