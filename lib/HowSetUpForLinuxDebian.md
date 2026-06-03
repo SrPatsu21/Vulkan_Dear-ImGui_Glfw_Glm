@@ -25,11 +25,11 @@ rm lib/v1.92.8.zip
 # Download
 wget -P lib/ "https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.zip" && \
 # Unzip
-unzip lib/3.4.zip -d lib/ && \
+unzip lib/glfw-3.4.zip -d lib/ && \
 # Rename
 mv lib/glfw-3.4 lib/glfw && \
 # Remove zip file
-rm lib/3.4.zip
+rm lib/glfw-3.4.zip
 ```
 
 ```shell
@@ -79,8 +79,8 @@ git clone --branch v1.4.352 https://github.com/KhronosGroup/Vulkan-Loader.git li
 sudo apt install -y libglm-dev && \
 # windows cross compile
 wget -P lib/ "https://github.com/g-truc/glm/releases/download/1.0.3/glm-1.0.3.zip" && \
-7z x lib/1.0.3.zip -o./lib/glm && \
-rm lib/1.0.3.zip
+7z x lib/glm-1.0.3.zip -o./lib/glm && \
+rm lib/glm-1.0.3.zip
 ```
 
 ### STD
@@ -112,8 +112,7 @@ sudo apt-get install libassimp-dev
 # windows cross compile
 wget -P lib/ https://github.com/assimp/assimp/archive/refs/tags/v6.0.5.zip
 7z x lib/v6.0.5.zip -o./lib/assimp
-mv lib/assimp/assimp-6.0.5/* lib/assimp/
-rm -R lib/assimp/assimp-6.0.5
+mv lib/assimp/assimp-6.0.5/* lib/assimp/  && \
 rm lib/v6.0.5.zip
 ```
 
@@ -180,20 +179,6 @@ for lib in "${LIBS[@]}"; do
         fi
     done
 done
-
-# copiar plugins e temas (seguros)
-mkdir -p "$DEST/libdecor/plugins-1"
-cp /usr/lib/x86_64-linux-gnu/libdecor/plugins-1/* "$DEST/libdecor/plugins-1/"
-
-mkdir -p "$DEST/share/themes"
-cp -r /usr/share/themes/Adwaita "$DEST/share/themes/"
-
-mkdir -p "$DEST/share/gtk-3.0"
-cp -r /usr/share/gtk-3.0/* "$DEST/share/gtk-3.0/"
-
-mkdir -p "$DEST/share/glib-2.0/schemas"
-cp -r /usr/share/glib-2.0/schemas/* "$DEST/share/glib-2.0/schemas/"
-```
 
 ## Build
 
