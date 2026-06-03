@@ -1,6 +1,6 @@
 mkdir -p lib/
 
-sudo apt-get install -y --no-install-recommends libgl-dev wayland-protocols libwayland-bin libwayland-dev libxkbcommon-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev pkg-config mingw-w64 mingw-w64-x86-64-dev libgl1-mesa-dev git cmake libvulkan-dev vulkan-tools vulkan-validationlayers glslang-tools libglm-dev apt-file libdecor-0-0 libdecor-0-plugin-1-gtk libdecor-0-plugin-1-cairo libgtk-3-0 gnome-themes-extra-data libassimp-dev
+sudo apt-get install -y --no-install-recommends libgl-dev wayland-protocols libwayland-bin libwayland-dev libxkbcommon-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev pkg-config mingw-w64 mingw-w64-x86-64-dev libgl1-mesa-dev git cmake libvulkan-dev vulkan-tools vulkan-validationlayers glslang-tools libglm-dev apt-file libdecor-0-0 libdecor-0-plugin-1-gtk libdecor-0-plugin-1-cairo libgtk-3-0 gnome-themes-extra-data libassimp-dev zlib1g-dev
 
 # Dear ImGui
 

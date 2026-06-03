@@ -3,7 +3,8 @@
 ## libs
 
 ```shell
-mkdir -p lib/
+mkdir -p ./lib/
+sudo apt install -y zlib1g-dev build-essential cmake pkg-config git mingw-w64 curl wget gnupg ca-certificates openssh-client
 ```
 
 ### Dear ImGui

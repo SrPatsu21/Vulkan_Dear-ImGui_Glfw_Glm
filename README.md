@@ -58,14 +58,14 @@ Container to compile everything together
 ```yaml
 services:
     dear-glfw-vulkan-compiler:
-        image: srpatsu21/dear-glfw-vulkan-compiler:1.2.0
+        image: srpatsu21/dear-glfw-vulkan-compiler:1.3.0
         container_name: dear-glfw-vulkan-dev
         stdin_open: true
         tty: true
         working_dir: /workspace
         environment:
             # ssh pass
-            ROOT_PASSWORD: devcontainer
+            ROOT_PASSWORD: 123
         ports:
             # ssh port
             - "2222:22"
@@ -87,9 +87,6 @@ services:
 
             # if you want to replace the scripts
             - ./scripts:/workspace/scripts
-
-            # map extensions here
-            - ./vscode-extensions:/root/.vscode-server/extensions/
 ```
 
 - Acess the container to compile
@@ -99,7 +96,7 @@ docker compose up -d
 docker exec -it dear-glfw-vulkan-dev bash
 ```
 
-or you can acess by vscode
+or you can acess by vscode or ssh
 
 - run script
   - Linux Debug
