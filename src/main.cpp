@@ -125,19 +125,15 @@ int main() {
     init_info.Device = device;
     init_info.QueueFamily = gfxIndex;
     init_info.Queue = queue;
-    init_info.PipelineCache = VK_NULL_HANDLE;
     init_info.DescriptorPool = descriptorPool;
     init_info.MinImageCount = 2;
     init_info.ImageCount = 2;
-    // init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
-    init_info.UseDynamicRendering = true;
-    init_info.Allocator = nullptr;
-    init_info.PipelineRenderingCreateInfo = pipelineInfo;
-    // init_info.RenderPass = renderPass;
+    init_info.UseDynamicRendering = false;
+    init_info.PipelineInfoMain.Subpass = 0;
+    init_info.PipelineInfoMain.RenderPass = renderPass;
+    init_info.PipelineInfoMain.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
 
     ImGui_ImplVulkan_Init(&init_info);
-
-    ImGui::GetIO().Fonts->AddFontDefault();
 
     uint32_t imageCount = 2;
     std::vector<VkImage> swapchainImages(imageCount);
