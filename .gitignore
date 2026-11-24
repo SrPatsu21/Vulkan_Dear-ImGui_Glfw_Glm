@@ -1,12 +1,3 @@
-#* libs
-lib/**/
-lib/*.zip
-lib/*.exe
-lib/*.xz
-lib/*.tar
 build
-build-windows
-build-release
-build-windows-release
+secrets
 .vscode
-vscode-extensions

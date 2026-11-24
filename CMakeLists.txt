@@ -13,7 +13,7 @@ project(
 # ----------------------------
 # C++ standard
 # ----------------------------
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ----------------------------
@@ -68,7 +68,7 @@ endif()
 add_subdirectory(lib/Vulkan-Headers)
 if(WIN32)
     if(NOT DEFINED VulkanHeaders_VERSION)
-        set(VulkanHeaders_VERSION "1.4.352")
+        set(VulkanHeaders_VERSION "1.4.363")
     endif()
     add_subdirectory(lib/Vulkan-Loader)
 elseif(UNIX)
