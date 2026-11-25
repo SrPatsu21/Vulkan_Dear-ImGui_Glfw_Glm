@@ -1,0 +1,52 @@
+dear-glfw-vulkan-compiler
+Copyright © 2026 SrPatsu21
+
+This project (Dockerfile, docker-compose.yml, CMakeLists.txt, toolchain file
+and build scripts) is distributed under the MIT License; see the LICENSE file.
+
+The Docker image built from this project downloads third-party libraries
+during the image build and places them in /workspace/lib. They are NOT part of
+this repository and keep their own licenses. The following is a non-exhaustive
+summary; refer to the license files inside each library folder for the full
+text and details.
+
+- Vulkan-Headers
+  Copyright © The Khronos Group Inc.
+  Licensed under the Apache License 2.0 or the MIT License
+
+- Vulkan-Loader
+  Copyright © The Khronos Group Inc. and contributors
+  Licensed under the Apache License 2.0
+
+- GLFW
+  Copyright © Marcus Geelnard, Camilla Löwy
+  Licensed under the zlib/libpng License
+
+- Dear ImGui
+  Copyright © Omar Cornut
+  Licensed under the MIT License
+
+- GLM (OpenGL Mathematics)
+  Copyright © G-Truc Creation
+  Licensed under the Happy Bunny License (modified MIT) or the MIT License
+
+- stb libraries
+  Copyright © Sean Barrett
+  Licensed under the MIT License or Public Domain
+
+- Assimp (Open Asset Import Library)
+  Copyright © assimp team
+  Licensed under the BSD 3-Clause License
+
+- KTX-Software
+  Copyright © The Khronos Group Inc. and contributors
+  Licensed mainly under the Apache License 2.0 (some files use other
+  licenses; see the files in the KTX-Software folder)
+
+The image also contains build tools installed from the Ubuntu repositories
+(for example GCC, CMake, MinGW-w64 and glslang), each distributed under its own
+license.
+
+Programs you build with this image may statically link some of the libraries
+above. If you distribute them, you are responsible for including the notices
+those libraries require.

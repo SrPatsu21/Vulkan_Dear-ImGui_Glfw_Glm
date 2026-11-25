@@ -30,7 +30,7 @@ ENV BUILD_ROOT=/build
 # Toolchains and system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        build-essential cmake ninja-build pkg-config git curl wget gnupg \
+        build-essential cmake pkg-config git curl wget gnupg \
         ca-certificates openssh-client openssh-server \
         mingw-w64 mingw-w64-x86-64-dev \
         libgl-dev libgl1-mesa-dev wayland-protocols libwayland-bin libwayland-dev \

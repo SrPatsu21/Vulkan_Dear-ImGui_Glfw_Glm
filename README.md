@@ -7,6 +7,23 @@ All third-party libraries (Vulkan, GLFW, Dear ImGui, GLM, Assimp, KTX, stb) live
 machine. Attach your IDE to the container (VS Code or SSH) and it resolves
 everything from there.
 
+## Source layout
+
+`CMakeLists.txt` builds a shared static library and two executables:
+
+```
+src/
+├── common/   # shared code           -> game_common (static lib)
+├── server/   # headless server       -> ProjectName_server
+└── client/   # graphics, input, UI   -> ProjectName_client
+    ├── image/stb_image_impl.cpp
+    └── assets/
+        ├── shaders/  (vertex.glsl, fragment.glsl)
+        └── models/   (optional, copied to the build folder)
+```
+
+Each of `common`, `server` and `client` needs at least one `.cpp` file.
+
 ## Start setup
 
 Copies the project files (`CMakeLists.txt`, `toolchain-mingw.cmake`, `src`,
@@ -168,9 +185,14 @@ mapped to `./build` on the host:
 
 | Script                        | Folder                      |
 | ----------------------------- | --------------------------- |
-| `build_linux.sh`              | `out/build`                 |
-| `build_linux_release.sh`      | `out/build-release`         |
-| `build_windows.sh`            | `out/build-windows`         |
-| `build_windows_release.sh`    | `out/build-windows-release` |
+| `build_linux.sh`              | `build/build`                 |
+| `build_linux_release.sh`      | `build/build-release`         |
+| `build_windows.sh`            | `build/build-windows`         |
+| `build_windows_release.sh`    | `build/build-windows-release` |
 
 To build somewhere else, change the `./build:/build` volume in `docker-compose.yml`.
+
+## License
+
+The files of this project are under the [MIT License](LICENSE). The libraries
+downloaded into the image keep their own licenses; see [NOTICE](NOTICE).

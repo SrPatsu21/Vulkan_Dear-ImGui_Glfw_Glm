@@ -2,8 +2,21 @@
 
 ## [2.0.0] - 2026-11-24
 
+### Added
+
+- MIT `LICENSE` and a `NOTICE` file listing third-party libraries and their licenses
+
 ### Changed
 
+- `CMakeLists.txt` now follows the Apotheosis layout: `game_common` static
+  library plus `<name>_server` and `<name>_client` executables, sections with
+  per-target definitions/includes, shaders, models and mods folders
+  - Sources are expected in `src/common`, `src/server` and `src/client`
+  - Outputs: executables in the build root, libs in `lib/`, shaders in `shaders/`
+  - Executables are now named `ProjectName_client` and `ProjectName_server`
+  - C++ standard: `17 -> 26`
+  - Linux RPATH: `$ORIGIN/lib/linux -> $ORIGIN/lib`
+  - GLM on Windows is read from `lib/glm/glm`
 - Base image: `ubuntu:25.04 -> ubuntu:26.04`
 - Libs are now downloaded during the image build and live **only inside the image**
   at `/workspace/lib` (no `lib/` folder or volume needed on the host); the IDE
