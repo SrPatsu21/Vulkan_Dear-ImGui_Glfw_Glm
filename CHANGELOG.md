@@ -28,6 +28,7 @@
 - SSH password is now read from a Docker secret (`ROOT_PASSWORD_FILE`,
   default `/run/secrets/ssh_root_password`); with no secret, SSH password login
   is disabled
+- main.cpp improved with lib tests
 
 ### Removed
 

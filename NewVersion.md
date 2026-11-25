@@ -8,7 +8,6 @@ Current version: **2.0.0**
       (`VULKAN_VERSION`, `GLFW_VERSION`, `IMGUI_VERSION`, `GLM_VERSION`,
       `ASSIMP_VERSION`, `KTX_VERSION`, `STB_REF`). Check the latest tags and bump
       them there. The libs are cloned into `/workspace/lib` inside the image.
-    - Keep `VULKAN_VERSION` and `VulkanHeaders_VERSION` in `CMakeLists.txt` in sync.
     - The base image is `ubuntu:26.04`; system packages are installed in the
       `Dockerfile`.
     - Update the version in `CHANGELOG.md` and in the image tag of
@@ -28,10 +27,9 @@ Current version: **2.0.0**
                  -t srpatsu21/dear-glfw-vulkan-compiler:2.0.0 .
     ```
 
-3. Create the SSH secret and start the container
+3. Create the SSH secret (see README) and start the container
 
     ```shell
-    ./scripts/setup_secrets.sh
     docker compose up -d
     docker exec -it dear-glfw-vulkan-dev bash
     ```

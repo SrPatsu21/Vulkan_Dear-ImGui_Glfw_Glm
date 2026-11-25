@@ -42,18 +42,27 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
-# Third-party libs, fetched at image build time and kept only inside the image
-RUN mkdir -p ${LIB_DIR} && cd ${LIB_DIR} && \
+# Third-party libs, fetched at image build time and kept only inside the image.
+# - The "is not a commit!" warning for annotated tags (Vulkan-Headers, GLFW,
+#   KTX-Software) is harmless: git still checks out the tagged commit.
+# - KTX-Software's only submodule (tests/cts) is for its tests, so it is skipped.
+#   If a future KTX version needs submodules, add --recurse-submodules back.
+# - .git is removed to save space, except in KTX-Software, whose CMake reads its
+#   version from the git tag.
+RUN git config --global advice.detachedHead false && \
+    mkdir -p ${LIB_DIR} && cd ${LIB_DIR} && \
     git clone --depth 1 --branch v${VULKAN_VERSION} https://github.com/KhronosGroup/Vulkan-Headers.git && \
     git clone --depth 1 --branch v${VULKAN_VERSION} https://github.com/KhronosGroup/Vulkan-Loader.git && \
     git clone --depth 1 --branch ${GLFW_VERSION} https://github.com/glfw/glfw.git && \
     git clone --depth 1 --branch ${IMGUI_VERSION} https://github.com/ocornut/imgui.git Dear-ImGui && \
-    git clone --depth 1 --branch ${GLM_VERSION} https://github.com/g-truc/glm.git glm/glm-${GLM_VERSION} && \
+    git clone --depth 1 --branch ${GLM_VERSION} https://github.com/g-truc/glm.git glm/glm && \
     git clone --depth 1 --branch ${ASSIMP_VERSION} https://github.com/assimp/assimp.git && \
-    git clone --depth 1 --branch ${KTX_VERSION} --recurse-submodules --shallow-submodules \
-        https://github.com/KhronosGroup/KTX-Software.git && \
+    git clone --depth 1 --branch ${KTX_VERSION} https://github.com/KhronosGroup/KTX-Software.git && \
     git clone --depth 1 --branch ${STB_REF} https://github.com/nothings/stb.git && \
-    find ${LIB_DIR} -name .git -prune -exec rm -rf {} +
+    find ${LIB_DIR} -path ${LIB_DIR}/KTX-Software -prune -o -name .git -prune -exec rm -rf {} +
+
+# Interactive shells (terminals, SSH) start in /workspace instead of /root
+RUN echo '[ -t 1 ] && [ "$PWD" = "$HOME" ] && cd /workspace' >> /root/.bashrc
 
 # SSH: root login with password, but the password comes from a Docker secret
 # at runtime (see docker-entrypoint.sh)
