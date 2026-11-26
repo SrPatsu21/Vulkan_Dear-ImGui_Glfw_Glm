@@ -13,8 +13,15 @@ project(
 # ============================================================
 # C++ Standard
 # ============================================================
-set(CMAKE_CXX_STANDARD 26)
+# C++26 needs GCC 14+. The MinGW-w64 compiler shipped with the image is older
+# (GCC 13), so Windows builds fall back to C++23 automatically.
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 14)
+    set(CMAKE_CXX_STANDARD 23)
+else()
+    set(CMAKE_CXX_STANDARD 26)
+endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+message(STATUS "C++ standard: ${CMAKE_CXX_STANDARD} (compiler ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION})")
 
 # ============================================================
 # Default build type

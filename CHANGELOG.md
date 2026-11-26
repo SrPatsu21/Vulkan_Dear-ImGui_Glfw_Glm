@@ -1,6 +1,6 @@
 # Changelog - dear-glfw-vulkan-compiler
 
-## [2.0.0] - 2026-11-24
+## [2.0.0] - 2026-11-25
 
 ### Added
 
@@ -14,7 +14,7 @@
   - Sources are expected in `src/common`, `src/server` and `src/client`
   - Outputs: executables in the build root, libs in `lib/`, shaders in `shaders/`
   - Executables are now named `ProjectName_client` and `ProjectName_server`
-  - C++ standard: `17 -> 26`
+  - C++ standard: `17 -> 26` (falls back to 23 when the compiler is older than GCC 14, e.g. MinGW-w64 in the image)
   - Linux RPATH: `$ORIGIN/lib/linux -> $ORIGIN/lib`
   - GLM on Windows is read from `lib/glm/glm`
 - Base image: `ubuntu:25.04 -> ubuntu:26.04`
@@ -28,7 +28,13 @@
 - SSH password is now read from a Docker secret (`ROOT_PASSWORD_FILE`,
   default `/run/secrets/ssh_root_password`); with no secret, SSH password login
   is disabled
-- main.cpp improved with lib tests
+
+### Fixed
+
+- `VulkanHeaders_VERSION` is now read from the cloned Vulkan-Headers instead of being hardcoded
+- Terminals and SSH sessions now start in `/workspace` instead of `/root`
+- `CMakeLists.txt` no longer fails when `src/common` or `src/server` are empty;
+  `game_common` and `_server` are only created when they have sources
 
 ### Removed
 

@@ -1,4 +1,3 @@
-
 #include <vulkan/vulkan.h>
 #include <GLFW/glfw3.h>
 #include <imgui.h>
@@ -12,10 +11,10 @@
 
 int main()
 {
-    std::cout << "=== TESTE DE BIBLIOTECAS ===\n\n";
+    std::cout << "=== LIBRARY TEST ===\n\n";
 
     // =========================================
-    // 1. TESTE GLM
+    // 1. GLM TEST
     // =========================================
 
     try
@@ -31,11 +30,11 @@ int main()
     }
     catch (...)
     {
-        std::cout << "[ERRO] GLM\n";
+        std::cout << "[ERROR] GLM\n";
     }
 
     // =========================================
-    // 2. TESTE ASSIMP
+    // 2. ASSIMP TEST
     // =========================================
 
     std::cout << "[OK] Assimp: "
@@ -44,7 +43,7 @@ int main()
               << aiGetVersionPatch() << "\n";
 
     // =========================================
-    // 3. TESTE STB IMAGE
+    // 3. STB IMAGE TEST
     // =========================================
 
     int width = 0;
@@ -63,70 +62,70 @@ int main()
 
     if (stbResult)
     {
-        std::cout << "[OK] STB Image: imagem de teste reconhecida\n";
+        std::cout << "[OK] STB Image: test image recognized\n";
     }
     else
     {
-        std::cout << "[OK] STB Image: API acessivel\n";
+        std::cout << "[OK] STB Image: API accessible\n";
     }
 
     // =========================================
-    // 4. TESTE KTX
+    // 4. KTX TEST
     // =========================================
 
     ktxTexture* texture = nullptr;
 
     KTX_error_code ktxResult = ktxTexture_CreateFromNamedFile(
-        "arquivo_inexistente.ktx",
+        "nonexistent_file.ktx",
         KTX_TEXTURE_CREATE_LOAD_IMAGE_DATA_BIT,
         &texture
     );
 
     if (ktxResult != KTX_SUCCESS)
     {
-        std::cout << "[OK] KTX: API acessivel e chamada executada\n";
+        std::cout << "[OK] KTX: API accessible and call executed\n";
     }
     else
     {
-        std::cout << "[OK] KTX: textura carregada\n";
+        std::cout << "[OK] KTX: texture loaded\n";
         ktxTexture_Destroy(texture);
     }
 
     // =========================================
-    // 5. TESTE IMGUI
+    // 5. IMGUI TEST
     // =========================================
 
     IMGUI_CHECKVERSION();
 
     ImGui::CreateContext();
 
-    std::cout << "[OK] ImGui: contexto criado\n";
+    std::cout << "[OK] ImGui: context created\n";
 
     ImGui::DestroyContext();
 
     // =========================================
-    // 6. TESTE GLFW
+    // 6. GLFW TEST
     // =========================================
 
     if (!glfwInit())
     {
-        std::cout << "[ERRO] GLFW: falha na inicializacao\n";
+        std::cout << "[ERROR] GLFW: initialization failed\n";
         return -1;
     }
 
-    std::cout << "[OK] GLFW: inicializado\n";
+    std::cout << "[OK] GLFW: initialized\n";
 
     if (!glfwVulkanSupported())
     {
-        std::cout << "[ERRO] GLFW: suporte Vulkan indisponivel\n";
+        std::cout << "[ERROR] GLFW: Vulkan support unavailable\n";
         glfwTerminate();
         return -1;
     }
 
-    std::cout << "[OK] GLFW: suporte Vulkan detectado\n";
+    std::cout << "[OK] GLFW: Vulkan support detected\n";
 
     // =========================================
-    // 7. CONFIGURACAO DA JANELA VULKAN
+    // 7. VULKAN WINDOW SETUP
     // =========================================
 
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -135,22 +134,22 @@ int main()
     GLFWwindow* window = glfwCreateWindow(
         800,
         600,
-        "TESTE DE COMPILADOR - GLFW + VULKAN",
+        "COMPILER TEST - GLFW + VULKAN",
         nullptr,
         nullptr
     );
 
     if (!window)
     {
-        std::cout << "[ERRO] GLFW: falha ao criar janela\n";
+        std::cout << "[ERROR] GLFW: failed to create window\n";
         glfwTerminate();
         return -1;
     }
 
-    std::cout << "[OK] GLFW: janela criada\n";
+    std::cout << "[OK] GLFW: window created\n";
 
     // =========================================
-    // 8. EXTENSOES VULKAN DO GLFW
+    // 8. GLFW VULKAN EXTENSIONS
     // =========================================
 
     uint32_t glfwExtensionCount = 0;
@@ -160,7 +159,7 @@ int main()
 
     if (!glfwExtensions || glfwExtensionCount == 0)
     {
-        std::cout << "[ERRO] Vulkan: extensoes GLFW indisponiveis\n";
+        std::cout << "[ERROR] Vulkan: GLFW extensions unavailable\n";
 
         glfwDestroyWindow(window);
         glfwTerminate();
@@ -168,16 +167,16 @@ int main()
         return -1;
     }
 
-    std::cout << "[OK] Vulkan: extensoes GLFW encontradas\n";
+    std::cout << "[OK] Vulkan: GLFW extensions found\n";
 
     // =========================================
-    // 9. CRIACAO DA INSTANCIA VULKAN
+    // 9. VULKAN INSTANCE CREATION
     // =========================================
 
     VkApplicationInfo appInfo{};
 
     appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    appInfo.pApplicationName = "Teste de Bibliotecas";
+    appInfo.pApplicationName = "Library Test";
     appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
     appInfo.pEngineName = "Custom Engine";
     appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
@@ -200,7 +199,7 @@ int main()
 
     if (resultVk != VK_SUCCESS)
     {
-        std::cout << "[ERRO] Vulkan: falha ao criar instancia: "
+        std::cout << "[ERROR] Vulkan: failed to create instance: "
                   << resultVk << "\n";
 
         glfwDestroyWindow(window);
@@ -209,10 +208,10 @@ int main()
         return -1;
     }
 
-    std::cout << "[OK] Vulkan: instancia criada\n";
+    std::cout << "[OK] Vulkan: instance created\n";
 
     // =========================================
-    // 10. ENUMERACAO DAS GPUs
+    // 10. GPU ENUMERATION
     // =========================================
 
     uint32_t gpuCount = 0;
@@ -225,7 +224,7 @@ int main()
 
     if (gpuResult != VK_SUCCESS)
     {
-        std::cout << "[ERRO] Vulkan: falha ao enumerar GPUs\n";
+        std::cout << "[ERROR] Vulkan: failed to enumerate GPUs\n";
 
         vkDestroyInstance(instance, nullptr);
         glfwDestroyWindow(window);
@@ -234,7 +233,7 @@ int main()
         return -1;
     }
 
-    std::cout << "[OK] Vulkan: GPUs encontradas: "
+    std::cout << "[OK] Vulkan: GPUs found: "
               << gpuCount << "\n";
 
     if (gpuCount > 0)
@@ -268,7 +267,7 @@ int main()
     }
 
     // =========================================
-    // 11. CRIACAO DA SURFACE VULKAN
+    // 11. VULKAN SURFACE CREATION
     // =========================================
 
     VkSurfaceKHR surface = VK_NULL_HANDLE;
@@ -282,7 +281,7 @@ int main()
 
     if (surfaceResult != VK_SUCCESS)
     {
-        std::cout << "[ERRO] Vulkan: falha ao criar surface: "
+        std::cout << "[ERROR] Vulkan: failed to create surface: "
                   << surfaceResult << "\n";
 
         vkDestroyInstance(instance, nullptr);
@@ -292,10 +291,10 @@ int main()
         return -1;
     }
 
-    std::cout << "[OK] Vulkan: surface criada\n";
+    std::cout << "[OK] Vulkan: surface created\n";
 
     // =========================================
-    // 12. LOOP DA JANELA
+    // 12. WINDOW LOOP
     // =========================================
 
     while (!glfwWindowShouldClose(window))
@@ -304,7 +303,7 @@ int main()
     }
 
     // =========================================
-    // 13. FINALIZACAO
+    // 13. CLEANUP
     // =========================================
 
     vkDestroySurfaceKHR(
@@ -321,7 +320,7 @@ int main()
     glfwDestroyWindow(window);
     glfwTerminate();
 
-    std::cout << "\nPrograma encerrado.\n";
+    std::cout << "\nProgram finished.\n";
 
     return 0;
 }
