@@ -63,6 +63,16 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
 endif()
 
 # ============================================================
+# MinGW Debug workaround
+# ============================================================
+if(WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        string(APPEND CMAKE_CXX_FLAGS_DEBUG " -O1")
+        message(STATUS "MinGW Debug: enabling -O1 to avoid type_info linker conflict")
+    endif()
+endif()
+
+# ============================================================
 # ---------------- COMMON LIBRARY ------------------------------
 # Shared code between client and server
 # ============================================================
@@ -365,6 +375,7 @@ add_custom_target(CreateModsDir ALL
 )
 
 # ============================================================
-# Output names (the server sets its own name above, only when it exists)
+# Output names
 # ============================================================
 set_target_properties(${PROJECT_NAME}_client PROPERTIES OUTPUT_NAME "${PROJECT_NAME}_client")
+set_target_properties(${PROJECT_NAME}_server PROPERTIES OUTPUT_NAME "${PROJECT_NAME}_server")
